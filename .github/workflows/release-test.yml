@@ -43,4 +43,4 @@ jobs:
     
     steps:
       - name: Run Release
-        run: echo "Hello release version is ${{ inputs.release_version }} and it is a release run {{ inputs.rel_run}} with beta release version as {{ inputs.beta_rel}} for user {{ inputs.github_user_repo }}"
+        run: echo "Hello release version is ${{ inputs.release_version }} and it is a release run {{ inputs.rel_run }} with beta release version as {{ inputs.beta_rel }} for user {{ inputs.github_user_repo }}"
