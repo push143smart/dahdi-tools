@@ -50,8 +50,10 @@ jobs:
 
       - name: Cloning Repo
         run: git clone git@github.com:push143smart/dahdi-tools.git
-            cd dahdi-tools
-            ls 
+
+      - name: Change directory
+        run: ls; cd dahdi-tools; ls
+          
 
       - name: Run Release if it is release run
         if: ${{ inputs.rel_run }}
