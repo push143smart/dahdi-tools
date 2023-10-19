@@ -54,7 +54,6 @@ jobs:
         run: echo "workspace ${GITHUB_WORKSPACE} with token as ${{ secrets.GITHUB_TOKEN}} Hello release version is ${{ inputs.release_version }} and it is a release run 0 with beta release version as ${{ inputs.beta_rel }} for user ${{ inputs.github_user_repo }}"
         
       - name: Run Script
- #       run: bash ${GITHUB_WORKSPACE}/ci/create-release.sh ${{ inputs.release_version }} 0 ${{ inputs.beta_rel }} ${{ inputs.github_user_repo }}
-        run: ls ${GITHUB_WORKSPACE}
+        run: bash ./ci/create-release.sh ${{ inputs.release_version }} 0 ${{ inputs.beta_rel }} ${{ inputs.github_user_repo }}
 
         
