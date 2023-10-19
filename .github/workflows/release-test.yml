@@ -48,6 +48,10 @@ jobs:
       - name: Install Pre-requisites
         run: sudo apt-get install -y *usb* gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) sqlite3 libsqlite3-dev git
 
+      - name: Add ssh keys
+        run: eval `ssh-agent -s`
+             ssh-add - <<< '${{ secrets.PRIVATE_SSH_KEY }}'
+             
       - name: Cloning Repo
         run: git clone git@github.com:push143smart/dahdi-tools.git
 
