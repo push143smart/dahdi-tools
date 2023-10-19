@@ -42,6 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+       - uses: actions/checkout@v2
+       
 #      - name: Install Pre-requisites
 #        run: sudo apt-get install -y *usb* gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) sqlite3 libsqlite3-dev 
 
