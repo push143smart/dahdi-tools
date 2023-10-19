@@ -42,23 +42,22 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
- #       - name: Checkout
- #         uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
        
-      - name: Install Pre-requisites
-        run: sudo apt-get install -y *usb* gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) sqlite3 libsqlite3-dev git
+ #     - name: Install Pre-requisites
+ #       run: sudo apt-get install -y *usb* gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) sqlite3 libsqlite3-dev git
 
-      - name: Add ssh keys
-        run: eval `ssh-agent -s`
-             ssh-add - <<< '${{ secrets.PRIVATE_SSH_KEY }}'
+ #     - name: Add ssh keys
+ #        run: eval `ssh-agent -s`
+ #            ssh-add - <<< '${{ secrets.PRIVATE_SSH_KEY }}'
              
-      - name: Cloning Repo
-        run: git clone git@github.com:push143smart/dahdi-tools.git
+ #      - name: Cloning Repo
+   #     run: git clone git@github.com:push143smart/dahdi-tools.git
 
-      - name: Change directory
-        run: ls; cd dahdi-tools; ls
-          
-
+    #  - name: Change directory
+     #   run: ls; cd dahdi-tools; ls
+     
       - name: Run Release if it is release run
         if: ${{ inputs.rel_run }}
         run: echo "workspace ${GITHUB_WORKSPACE} with token as ${{ secrets.GITHUB_TOKEN}} Hello release version is ${{ inputs.release_version }} and it is a release run 1 with beta release version as ${{ inputs.beta_rel }} for user ${{ inputs.github_user_repo }}";ls ${GITHUB_WORKSPACE}
