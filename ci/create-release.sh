@@ -55,7 +55,7 @@ mkdir release
 cd release
 
 echo "Cloning DAHDI Linux"
-git clone https://$5@github.com:$user/dahdi-linux.git
+git clone https://$5@github.com/$user/dahdi-linux.git
 cd dahdi-linux
 git branch -a
 ls
