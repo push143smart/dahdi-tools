@@ -49,12 +49,16 @@ else
     user=$4
 fi
 
-echo "Running in mode $dry_run for creating DAHDI Release $release_name from user $user with branch $branch_name."
-
-exit
+echo "Running in mode $dry_run for creating DAHDI Release $release_name from user $user with branch $branch_name with token as $5."
 
 mkdir release
 cd release
+
+echo "Cloning DAHDI Linux"
+git clone git@github.com:$user/dahdi-linux.git
+exit
+
+
 
 echo "Creating DAHDI Linux Complete"
 linux_complete_name="dahdi-linux-complete-"$release_name"+"$release_name
