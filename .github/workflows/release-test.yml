@@ -42,18 +42,19 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Install Pre-requisites
-        run: sudo apt-get install -y *usb* gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) sqlite3 libsqlite3-dev 
+#      - name: Install Pre-requisites
+#        run: sudo apt-get install -y *usb* gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) sqlite3 libsqlite3-dev 
 
       - name: Run Release if it is release run
         if: ${{ inputs.rel_run }}
-        run: echo "workspace ${GITHUB_WORKSPACE} with token as ${{ secrets.GITHUB_TOKEN}} Hello release version is ${{ inputs.release_version }} and it is a release run 1 with beta release version as ${{ inputs.beta_rel }} for user ${{ inputs.github_user_repo }}"
+        run: echo "workspace ${GITHUB_WORKSPACE} with token as ${{ secrets.GITHUB_TOKEN}} Hello release version is ${{ inputs.release_version }} and it is a release run 1 with beta release version as ${{ inputs.beta_rel }} for user ${{ inputs.github_user_repo }}";ls ${GITHUB_WORKSPACE}
 
       - name: Run Release if its is dry run
         if: ${{ !inputs.rel_run }}
         run: echo "workspace ${GITHUB_WORKSPACE} with token as ${{ secrets.GITHUB_TOKEN}} Hello release version is ${{ inputs.release_version }} and it is a release run 0 with beta release version as ${{ inputs.beta_rel }} for user ${{ inputs.github_user_repo }}"
         
       - name: Run Script
-        run: bash ${GITHUB_WORKSPACE}/ci/create-release.sh ${{ inputs.release_version }} 0 ${{ inputs.beta_rel }} ${{ inputs.github_user_repo }}
+ #       run: bash ${GITHUB_WORKSPACE}/ci/create-release.sh ${{ inputs.release_version }} 0 ${{ inputs.beta_rel }} ${{ inputs.github_user_repo }}
+        run: ls ${GITHUB_WORKSPACE}
 
         
