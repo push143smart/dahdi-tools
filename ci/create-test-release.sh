@@ -98,6 +98,23 @@ create_project_release_tar() {
         gpg --verify $project_name-$release_name.tar.gz.asc
 }
 
+import_gpg_key() {
+        resp_code=`curl -s -o response.txt -w "%{http_code}" -L \
+                  -H "Accept: application/vnd.github+json" \
+                  -H "Authorization: Bearer $github_token" \
+                  -H "X-GitHub-Api-Version: 2022-11-28" \
+                  https://api.github.com/user/gpg_keys`
+
+        if [ "$resp_code" == "200" ] || [ "$resp_code" == "201" ] || [ "$resp_code" == "202" ]; then
+                cat response.txt | grep -oP "(?<=raw_key\":)[^","]*"  | awk -F\" '{print $2}' | sed 's/\\r\\n/\n/g' |  sed -z 's/\(.*\)\n$/\1/' > import_gpg.key
+                gpg --import import_gpg.key
+                gpg --list-keys
+                rm -rf import_gpg.key
+        else
+                echo "Not able to import gpgkey"
+        fi
+}
+
 create_github_release() {
         project_name=$1
 
@@ -211,6 +228,12 @@ fi
 echo "Setting up git global config....."
 git config --global user.email "psingh@sangoma.com"
 git config --global user.name "Pushkar Singh"
+
+echo "Setting up user gpg key"
+import_gpg_key
+
+echo "Setting up user ssh keys"
+
 
 echo "Creating $project Release $release_name from branch $branch_name of $user"
 
