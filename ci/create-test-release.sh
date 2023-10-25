@@ -208,9 +208,15 @@ if [ "w$6" != "w" ]; then
         github_token=$6
 fi
 
+echo "Setting up git global config....."
+git config --global user.email "psingh@sangoma.com"
+git config --global user.name "Pushkar Singh"
+
 echo "Creating $project Release $release_name from branch $branch_name of $user"
 
 mkdir release
+ls -lrt
+
 cd release
 
 if [ "$project" == "dahdi-linux-complete" ]; then
@@ -218,7 +224,9 @@ if [ "$project" == "dahdi-linux-complete" ]; then
         linux_complete_name="dahdi-linux-complete-"$release_name"+"$release_name
         echo "$linux_complete_name"
         mkdir dahdi-linux-complete-$release_name+$release_name
-        cp -rfL ../../dahdi-linux-complete-common/* dahdi-linux-complete-$release_name+$release_name/.
+        ls -lrt
+        #Pushkar to come back in here
+        #cp -rfL ../../dahdi-linux-complete-common/* dahdi-linux-complete-$release_name+$release_name/.
 
 #Download project
         download_github_project dahdi-linux
@@ -233,10 +241,14 @@ if [ "$project" == "dahdi-linux-complete" ]; then
         echo $release_name > ../$linux_complete_name/linux/.version
 
         echo "Changing directory to linux folder of $linux_complete_name"
-        cd ../$linux_complete_name/linux
+        cd ../$linux_complete_name
+        ls -lrt
+        cd linux
         make install-firmware firmware-loaders
         cd ../../dahdi-linux
-
+        ls -lrt
+        exit
+        
 #Create Dahdi-linux release tar ball
         create_project_release_tar dahdi-linux
 
