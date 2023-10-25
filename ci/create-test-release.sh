@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 user="asterisk"
 project="dahdi-linux"
 dry_run="1"
@@ -42,6 +44,7 @@ create_checkout_github_project_branch() {
         if [ "$dry_run" == "0" ]; then
                 if [[ -z ${branch_present} ]]; then
                         echo "Creating branch $branch_name for $project_name"
+                        git remote -v
                         git push origin master:refs/heads/$branch_name
                 fi
 
