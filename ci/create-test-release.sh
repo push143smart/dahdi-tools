@@ -107,7 +107,7 @@ create_project_release_tar() {
 
 import_gpg_key() {
         if [ "w$7" != "w" ]; then
-                cat "$7"
+                cat "PUSHKAR: $7"
                 cat "$7" > import_gpg.key
                 cat import_gpg.key
                 gpg --import import_gpg.key
@@ -246,7 +246,7 @@ echo "Setting up git global config....."
 git config --global user.email "psingh@sangoma.com"
 git config --global user.name "Pushkar Singh"
 
-echo "Setting up user gpg key"
+echo "Setting up user gpg key and $7"
 import_gpg_key
 
 echo "Setting up user ssh keys"
