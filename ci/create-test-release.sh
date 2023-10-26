@@ -291,7 +291,6 @@ if [ "$project" == "dahdi-linux-complete" ]; then
         make install-firmware firmware-loaders DESTDIR=../../../../../release
         cd ../../dahdi-linux
         ls -lrt
-        exit
         
 #Create Dahdi-linux release tar ball
         create_project_release_tar dahdi-linux
