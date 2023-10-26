@@ -106,7 +106,7 @@ create_project_release_tar() {
 }
 
 import_gpg_key() {
-        if [ "w$7" != "w" ]; then
+        if [ "w$gpg_priv_token" != "w" ]; then
                 cat "PUSHKAR: $7"
                 cat "$7" > import_gpg.key
                 cat import_gpg.key
@@ -242,6 +242,9 @@ if [ "w$6" != "w" ]; then
         github_token=$6
 fi
 
+if [ "w$6" != "w" ]; then
+        gpg_priv_token=$7
+fi
 echo "Setting up git global config....."
 git config --global user.email "psingh@sangoma.com"
 git config --global user.name "Pushkar Singh"
