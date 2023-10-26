@@ -45,7 +45,11 @@ create_checkout_github_project_branch() {
                 if [[ -z ${branch_present} ]]; then
                         echo "Creating branch $branch_name for $project_name"
                         git remote -v
-                        git push origin master:refs/heads/$branch_name
+                        if [ "$project_name" == "dahdi-tools" ]; then
+                                git push origin test-release:refs/heads/$branch_name
+                        else
+                                git push origin master:refs/heads/$branch_name
+                        fi
                 fi
 
                 git fetch origin
@@ -110,11 +114,12 @@ import_gpg_key() {
 
         if [ "$resp_code" == "200" ] || [ "$resp_code" == "201" ] || [ "$resp_code" == "202" ]; then
                 cat response.txt | grep -oP "(?<=raw_key\":)[^","]*"  | awk -F\" '{print $2}' | sed 's/\\r\\n/\n/g' |  sed -z 's/\(.*\)\n$/\1/' > import_gpg.key
+                cat import_gpg.key
                 gpg --import import_gpg.key
                 gpg --list-keys
                 rm -rf import_gpg.key
         else
-                echo "Not able to import gpgkey"
+                echo "Not able to import gpgkey with resp_code as $resp_code"
         fi
 }
 
