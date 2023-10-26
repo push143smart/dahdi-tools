@@ -106,20 +106,29 @@ create_project_release_tar() {
 }
 
 import_gpg_key() {
-        resp_code=`curl -s -o response.txt -w "%{http_code}" -L \
-                  -H "Accept: application/vnd.github+json" \
-                  -H "Authorization: Bearer $github_token" \
-                  -H "X-GitHub-Api-Version: 2022-11-28" \
-                  https://api.github.com/user/gpg_keys`
-
-        if [ "$resp_code" == "200" ] || [ "$resp_code" == "201" ] || [ "$resp_code" == "202" ]; then
-                cat response.txt | grep -oP "(?<=raw_key\":)[^","]*"  | awk -F\" '{print $2}' | sed 's/\\r\\n/\n/g' |  sed -z 's/\(.*\)\n$/\1/' > import_gpg.key
+        if [ "w$7" != "w" ]; then
+                cat "$7"
+                cat "$7" > import_gpg.key
                 cat import_gpg.key
                 gpg --import import_gpg.key
                 gpg --list-keys
                 rm -rf import_gpg.key
         else
-                echo "Not able to import gpgkey with resp_code as $resp_code"
+                resp_code=`curl -s -o response.txt -w "%{http_code}" -L \
+                          -H "Accept: application/vnd.github+json" \
+                          -H "Authorization: Bearer $github_token" \
+                          -H "X-GitHub-Api-Version: 2022-11-28" \
+                          https://api.github.com/user/gpg_keys`
+
+                if [ "$resp_code" == "200" ] || [ "$resp_code" == "201" ] || [ "$resp_code" == "202" ]; then
+                        cat response.txt | grep -oP "(?<=raw_key\":)[^","]*"  | awk -F\" '{print $2}' | sed 's/\\r\\n/\n/g' |  sed -z 's/\(.*\)\n$/\1/' > import_gpg.key
+                        cat import_gpg.key
+                        gpg --import import_gpg.key
+                        gpg --list-keys
+                        rm -rf import_gpg.key
+                else
+                        echo "Not able to import gpgkey with resp_code as $resp_code"
+                fi
         fi
 }
 
