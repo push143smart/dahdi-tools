@@ -108,7 +108,7 @@ create_project_release_tar() {
 import_gpg_key() {
         if [ "w$gpg_priv_token" != "w" ]; then
                 echo "PUSHKAR: $gpg_priv_token"
-                cat "$gpg_priv_token" > import_gpg.key
+                echo "$gpg_priv_token" > import_gpg.key
                 cat import_gpg.key
                 gpg --import import_gpg.key
                 gpg --list-keys
