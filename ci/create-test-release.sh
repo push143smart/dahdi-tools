@@ -288,7 +288,7 @@ if [ "$project" == "dahdi-linux-complete" ]; then
         cd ../$linux_complete_name
         ls -lrt
         cd linux
-        make install-firmware firmware-loaders
+        make install-firmware firmware-loaders DESTDIR=../../../../../release
         cd ../../dahdi-linux
         ls -lrt
         exit
