@@ -72,10 +72,8 @@ jobs:
 
       - name: Run Release if its is dry run
         if: ${{ !inputs.rel_run }}
-        run: echo "workspace ${GITHUB_WORKSPACE} with token as ${{ secrets.GITHUB_TOKEN}} and ${{secrets.GH_AUTH_KEY }} Hello release version is ${{ inputs.release_version }} and it is a release run 0 with beta release version as ${{ inputs.beta_rel }} for user ${{ inputs.github_user_repo }}"
+        run: echo "workspace ${GITHUB_WORKSPACE} with token as ${{ secrets.GITHUB_TOKEN}} and ${{ secrets.DAHDI_DEV_AUTH_KEY }} Hello release version is ${{ inputs.release_version }} and it is a release run 0 with beta release version as ${{ inputs.beta_rel }} for user ${{ inputs.github_user_repo }}"
         
       - name: Run Script
         #run: bash ./ci/create-test-release.sh ${{ inputs.release_version }} 0 ${{ inputs.beta_rel }} ${{ inputs.github_user_repo }} ${{ secrets.GITHUB_TOKEN}}
-        run: bash ./ci/create-test-release.sh ${{ inputs.project_name }} ${{ inputs.release_version }} 0 ${{ inputs.beta_rel }} ${{ inputs.github_user_repo }} ${{secrets.GH_AUTH_KEY}}
-
-        
+        run: bash ./ci/create-test-release.sh ${{ inputs.project_name }} ${{ inputs.release_version }} 0 ${{ inputs.beta_rel }} ${{ inputs.github_user_repo }} ${{ secrets.DAHDI_DEV_AUTH_KEY }} ${{ secrets.DAHDI_DEV_PRIV_GPG_KEY }}
