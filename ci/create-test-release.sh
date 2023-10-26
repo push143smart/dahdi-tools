@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -e
+export GPG_TTY=$(tty)
 
 user="asterisk"
 project="dahdi-linux"
