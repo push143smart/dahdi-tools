@@ -76,6 +76,6 @@ jobs:
         
       - name: Run Script
         #run: bash ./ci/create-test-release.sh ${{ inputs.release_version }} 0 ${{ inputs.beta_rel }} ${{ inputs.github_user_repo }} ${{ secrets.GITHUB_TOKEN}}
-        run: bash ./ci/create-test-release.sh ${{ inputs.project_name }} ${{ inputs.release_version }} 0 ${{ inputs.beta_rel }} ${{ inputs.github_user_repo }} ${{ secrets.GH_AUTH_KEY }}
+        run: bash ./ci/create-test-release.sh ${{ inputs.project_name }} ${{ inputs.release_version }} 0 ${{ inputs.beta_rel }} ${{ inputs.github_user_repo }} ${{secrets.GH_AUTH_KEY}}
 
         
